@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1585141380446
+Build-Jdk: 1.8.0_91
+Built-By: formacion
+Bundle-Category: library
+Bundle-Description: Proyecto credito
+Bundle-ManifestVersion: 2
+Bundle-Name: CINTR001IMPL
+Bundle-SymbolicName: CINTR001IMPL-0.0.0
+Bundle-Version: 0.0.0
+Created-By: Apache Maven Bundle Plugin
+Import-Package: com.bbva.cint.dto.creditator;version="0.0",com.bbva.cint
+ .lib.r001;version="0.0",com.bbva.elara.aspect;version="0.0";resolution:
+ =optional,com.bbva.elara.configuration.manager.application;version="0.0
+ ";resolution:=optional,com.bbva.elara.configuration.manager.application
+ .factory;version="0.0";resolution:=optional,com.bbva.elara.library;vers
+ ion="0.0";resolution:=optional,org.aopalliance.aop;version="0.0";resolu
+ tion:=optional,org.codehaus.jackson;version="0.0",org.codehaus.jackson.
+ map;version="0.0",org.codehaus.jackson.node;version="0.0",org.osgi.fram
+ ework;version="0.0";resolution:=optional,org.slf4j;version="0.0",org.sp
+ ringframework.aop;version="0.0";resolution:=optional,org.springframewor
+ k.aop.framework;version="0.0";resolution:=optional,spring;version="0.0"
+ ;resolution:=optional
+Tool: Bnd-1.50.0

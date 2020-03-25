@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1585141385727
+Build-Jdk: 1.8.0_91
+Built-By: formacion
+Bundle-Activator: com.bbva.cint.CINTT00101COTransaction
+Bundle-Category: transaction
+Bundle-Description: Descripcion
+Bundle-ManifestVersion: 2
+Bundle-Name: CINTT001
+Bundle-SymbolicName: CINTT001-01-CO
+Bundle-Version: 01.0.0.CO
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.bbva.cint;uses:="com.bbva.elara.transaction,com.bbva
+ .cint.dto.creditator,org.slf4j,com.bbva.elara.domain.transaction.respon
+ se,com.bbva.cint.lib.r001,com.bbva.elara.domain.transaction";version="0
+ 1.0.0.CO"
+Import-Package: com.bbva.cint.dto.creditator;version="[0.0,1)",com.bbva.
+ cint.lib.r001;version="0.0",com.bbva.elara.domain.transaction;version="
+ 0.0",com.bbva.elara.domain.transaction.response;version="0.0",com.bbva.
+ elara.transaction;version="0.0",org.slf4j;version="0.0"
+Tool: Bnd-1.50.0

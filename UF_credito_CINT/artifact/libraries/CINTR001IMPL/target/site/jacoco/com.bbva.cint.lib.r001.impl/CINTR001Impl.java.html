@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CINTR001Impl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CINTR001IMPL</a> &gt; <a href="index.source.html" class="el_package">com.bbva.cint.lib.r001.impl</a> &gt; <span class="el_source">CINTR001Impl.java</span></div><h1>CINTR001Impl.java</h1><pre class="source lang-java linenums">package com.bbva.cint.lib.r001.impl;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.bbva.cint.dto.creditator.DataOutCreDTO;
+import com.bbva.cint.lib.r001.CINTR001;
+
+<span class="fc" id="L16">public class CINTR001Impl extends CINTR001Abstract {</span>
+
+<span class="fc" id="L18">	private static final Logger LOGGER = LoggerFactory.getLogger(CINTR001.class);</span>
+
+	/* (non-Javadoc)
+	 * @see com.bbva.cint.lib.r001.CINTR001#execute(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public DataOutCreDTO execute(String pan, String rutaBase) {
+<span class="fc" id="L25">		DataOutCreDTO out = null;</span>
+		try {
+<span class="fc" id="L27">			LOGGER.info(&quot;Starting execute&quot;);</span>
+<span class="fc" id="L28">			out = toDataOutArray(obtenerRegistroxPan(pan,rutaBase));</span>
+<span class="fc" id="L29">			writeDataOutCreDTOJson(out,pan);</span>
+			
+<span class="fc" id="L31">			LOGGER.info(&quot;Finaly execute&quot;);</span>
+<span class="fc" id="L32">		} catch (Exception e) {</span>
+<span class="fc" id="L33">			return null;</span>
+<span class="fc" id="L34">		}	</span>
+<span class="fc" id="L35">		return out;</span>
+	}
+	
+	
+	/**
+	 * @param pan
+	 * @param rutaBase
+	 * @return
+	 */
+	private String[] obtenerRegistroxPan(String pan, String rutaBase){
+<span class="fc" id="L45">		String[] lineResult = null;</span>
+		try {
+<span class="fc" id="L47">			String line = &quot;&quot;;</span>
+<span class="fc" id="L48">		    BufferedReader bfr = new BufferedReader(new FileReader(new File(rutaBase)));</span>
+			
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">		    while((line = bfr.readLine()) != null){</span>
+<span class="fc" id="L51">		    	String[] arrayLine = line.split(&quot;;&quot;);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">		    	if(pan.equals(arrayLine[0].trim()+arrayLine[1].trim())){</span>
+<span class="fc" id="L53">		    		lineResult = arrayLine;</span>
+<span class="fc" id="L54">		    		break;</span>
+		    	}
+<span class="fc" id="L56">		    }</span>
+<span class="fc" id="L57">		} catch (Exception e) {</span>
+<span class="fc" id="L58">			LOGGER.info(&quot;Error: &quot; + e.getMessage());</span>
+<span class="fc" id="L59">		}</span>
+<span class="fc" id="L60">		return lineResult;</span>
+	}
+	
+	/**
+	 * @param arrStr
+	 * @return
+	 */
+	private DataOutCreDTO toDataOutArray(String[] arrStr){
+<span class="fc" id="L68">		DataOutCreDTO out = new DataOutCreDTO();</span>
+		
+<span class="fc" id="L70">		out.setEntBancaria(arrStr[2]);</span>
+<span class="fc" id="L71">		out.setCentro(arrStr[3]);</span>
+<span class="fc" id="L72">		out.setProducto(arrStr[4]);</span>
+<span class="fc" id="L73">		out.setNumContrato(arrStr[5]);</span>
+<span class="fc" id="L74">		out.setTitular(arrStr[6]);</span>
+<span class="fc" id="L75">		out.setDireccion(arrStr[7]);</span>
+<span class="fc" id="L76">		out.setTasaInteres(Float.parseFloat(arrStr[8].replace(',', '.').trim()));</span>
+<span class="fc" id="L77">		out.setDeuda(Float.parseFloat(arrStr[9].trim()));</span>
+<span class="fc" id="L78">		out.setCalCuotas(calcularCuotas(out.getTasaInteres(),out.getDeuda(),3));</span>
+		
+<span class="fc" id="L80">		return out;</span>
+	}
+	
+	/**
+	 * @param tasa
+	 * @param deuda
+	 * @param meses
+	 * @return
+	 */
+	private float[][] calcularCuotas(float tasa, float deuda,int meses){
+<span class="fc" id="L90">		float[][] calculo = new float[meses][2];</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">		for (int i = 0; i &lt;= calculo.length - 1; i++) {</span>
+<span class="fc" id="L92">			calculo[i][0] = deuda / meses;</span>
+<span class="pc bpc" id="L93" title="1 of 4 branches missed.">			switch (i) {</span>
+<span class="fc" id="L94">				case 0:	calculo[i][1] = 0;break;</span>
+<span class="fc" id="L95">				case 1: calculo[i][1] = (deuda *(tasa/100)) + (deuda - (deuda / meses)) * ((tasa/100)); break;</span>
+<span class="fc" id="L96">				case 2: calculo[i][1] = ((deuda / meses) *(tasa/100)); break;</span>
+			}
+		}
+<span class="fc" id="L99">		return calculo;</span>
+	}
+	
+	/**
+	 * @param out
+	 */
+	private void writeDataOutCreDTOJson(DataOutCreDTO out,String pan){
+		try {
+<span class="fc" id="L107">			File file = new File(&quot;C:/Users/formacion/Desktop/IDE_APX_win64/IDE_APX_win64/workspace/UF_credito_CINT/DataOutCreDTO.json&quot;);</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">			if(!file.exists())</span>
+<span class="nc" id="L109">				file.createNewFile();</span>
+			
+<span class="fc" id="L111">			ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="fc" id="L112">			JsonNode node = objectMapper.valueToTree(out);</span>
+<span class="fc" id="L113">			((ObjectNode)node).put(&quot;PAN&quot;, pan);</span>
+<span class="fc" id="L114">			objectMapper.writeValue(file, node);</span>
+			
+<span class="nc" id="L116">		} catch (Exception e) {</span>
+			// TODO: handle exception
+<span class="fc" id="L118">		}</span>
+<span class="fc" id="L119">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
