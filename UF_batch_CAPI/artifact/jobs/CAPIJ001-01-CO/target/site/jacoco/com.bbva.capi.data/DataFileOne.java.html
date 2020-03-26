@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataFileOne.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CAPIJ001-01-CO</a> &gt; <a href="index.source.html" class="el_package">com.bbva.capi.data</a> &gt; <span class="el_source">DataFileOne.java</span></div><h1>DataFileOne.java</h1><pre class="source lang-java linenums">package com.bbva.capi.data;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+public class DataFileOne {
+	
+<span class="fc" id="L19">	private static final Logger LOGGER = LoggerFactory.getLogger(DataFileOne.class);</span>
+	private String numOrden;
+	private String bin;
+	private String iai;
+	private String entidad;
+	private String oficina;
+	private String producto;
+	private String contrato;
+	private String nombre;
+	private String dirreccion;
+	private String tasa;
+	private String deuda;
+	
+<span class="nc" id="L32">	public DataFileOne(){}</span>
+	/**
+	 * @param numOrden
+	 * @param bin
+	 * @param iai
+	 * @param entidad
+	 * @param oficina
+	 * @param producto
+	 * @param contrato
+	 * @param nombre
+	 * @param dirreccion
+	 * @param tasa
+	 * @param deuda
+	 */
+	public DataFileOne(String numOrden, String bin, String iai, String entidad, String oficina, String producto,
+			String contrato, String nombre, String dirreccion, String tasa, String deuda) {
+<span class="nc" id="L48">		super();</span>
+<span class="nc" id="L49">		this.numOrden = numOrden;</span>
+<span class="nc" id="L50">		this.bin = bin;</span>
+<span class="nc" id="L51">		this.iai = iai;</span>
+<span class="nc" id="L52">		this.entidad = entidad;</span>
+<span class="nc" id="L53">		this.oficina = oficina;</span>
+<span class="nc" id="L54">		this.producto = producto;</span>
+<span class="nc" id="L55">		this.contrato = contrato;</span>
+<span class="nc" id="L56">		this.nombre = nombre;</span>
+<span class="nc" id="L57">		this.dirreccion = dirreccion;</span>
+<span class="nc" id="L58">		this.tasa = tasa;</span>
+<span class="nc" id="L59">		this.deuda = deuda;</span>
+<span class="nc" id="L60">	}</span>
+	
+	public DataFileOne(String[] arrayDatos ) {
+<span class="fc" id="L63">		super();</span>
+<span class="fc" id="L64">		this.bin 		= arrayDatos[0];</span>
+<span class="fc" id="L65">		this.iai 		= arrayDatos[1];</span>
+<span class="fc" id="L66">		this.entidad 	= arrayDatos[2];</span>
+<span class="fc" id="L67">		this.oficina 	= arrayDatos[3];</span>
+<span class="fc" id="L68">		this.producto 	= arrayDatos[4];</span>
+<span class="fc" id="L69">		this.contrato 	= arrayDatos[5];</span>
+<span class="fc" id="L70">		this.nombre 	= arrayDatos[6];</span>
+<span class="fc" id="L71">		this.dirreccion = arrayDatos[7];</span>
+<span class="fc" id="L72">		this.tasa 		= arrayDatos[8];</span>
+<span class="fc" id="L73">		this.deuda 		= arrayDatos[9];</span>
+<span class="fc" id="L74">		this.numOrden 	= this.entidad+this.oficina+this.producto+this.contrato;</span>
+<span class="fc" id="L75">	}</span>
+	
+	public DataFileOne(String[] arrayDatos,int val ) {
+<span class="fc" id="L78">		super();</span>
+<span class="fc" id="L79">		this.numOrden   = arrayDatos[0];</span>
+<span class="fc" id="L80">		this.bin 		= arrayDatos[1];</span>
+<span class="fc" id="L81">		this.iai 		= arrayDatos[2];</span>
+<span class="fc" id="L82">		this.entidad 	= arrayDatos[3];</span>
+<span class="fc" id="L83">		this.oficina 	= arrayDatos[4];</span>
+<span class="fc" id="L84">		this.producto 	= arrayDatos[5];</span>
+<span class="fc" id="L85">		this.contrato 	= arrayDatos[6];</span>
+<span class="fc" id="L86">		this.nombre 	= arrayDatos[7];</span>
+<span class="fc" id="L87">		this.dirreccion = arrayDatos[8];</span>
+<span class="fc" id="L88">		this.tasa 		= arrayDatos[9];</span>
+<span class="fc" id="L89">		this.deuda 		= arrayDatos[10];</span>
+<span class="fc" id="L90">	}</span>
+	
+	/**
+	 * @return the numOrden
+	 */
+	public String getNumOrden() {
+<span class="fc" id="L96">		return numOrden;</span>
+	}
+	/**
+	 * @param numOrden the numOrden to set
+	 */
+	public void setNumOrden(String numOrden) {
+<span class="nc" id="L102">		this.numOrden = numOrden;</span>
+<span class="nc" id="L103">	}</span>
+	/**
+	 * @return the bin
+	 */
+	public String getBin() {
+<span class="fc" id="L108">		return bin;</span>
+	}
+	/**
+	 * @param bin the bin to set
+	 */
+	public void setBin(String bin) {
+<span class="nc" id="L114">		this.bin = bin;</span>
+<span class="nc" id="L115">	}</span>
+	/**
+	 * @return the iai
+	 */
+	public String getIai() {
+<span class="fc" id="L120">		return iai;</span>
+	}
+	/**
+	 * @param iai the iai to set
+	 */
+	public void setIai(String iai) {
+<span class="nc" id="L126">		this.iai = iai;</span>
+<span class="nc" id="L127">	}</span>
+	/**
+	 * @return the entidad
+	 */
+	public String getEntidad() {
+<span class="nc" id="L132">		return entidad;</span>
+	}
+	/**
+	 * @param entidad the entidad to set
+	 */
+	public void setEntidad(String entidad) {
+<span class="nc" id="L138">		this.entidad = entidad;</span>
+<span class="nc" id="L139">	}</span>
+	/**
+	 * @return the oficina
+	 */
+	public String getOficina() {
+<span class="nc" id="L144">		return oficina;</span>
+	}
+	/**
+	 * @param oficina the oficina to set
+	 */
+	public void setOficina(String oficina) {
+<span class="nc" id="L150">		this.oficina = oficina;</span>
+<span class="nc" id="L151">	}</span>
+	/**
+	 * @return the producto
+	 */
+	public String getProducto() {
+<span class="nc" id="L156">		return producto;</span>
+	}
+	/**
+	 * @param producto the producto to set
+	 */
+	public void setProducto(String producto) {
+<span class="nc" id="L162">		this.producto = producto;</span>
+<span class="nc" id="L163">	}</span>
+	/**
+	 * @return the contrato
+	 */
+	public String getContrato() {
+<span class="nc" id="L168">		return contrato;</span>
+	}
+	/**
+	 * @param contrato the contrato to set
+	 */
+	public void setContrato(String contrato) {
+<span class="nc" id="L174">		this.contrato = contrato;</span>
+<span class="nc" id="L175">	}</span>
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+<span class="nc" id="L180">		return nombre;</span>
+	}
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+<span class="nc" id="L186">		this.nombre = nombre;</span>
+<span class="nc" id="L187">	}</span>
+	/**
+	 * @return the dirreccion
+	 */
+	public String getDirreccion() {
+<span class="nc" id="L192">		return dirreccion;</span>
+	}
+	/**
+	 * @param dirreccion the dirreccion to set
+	 */
+	public void setDirreccion(String dirreccion) {
+<span class="nc" id="L198">		this.dirreccion = dirreccion;</span>
+<span class="nc" id="L199">	}</span>
+	/**
+	 * @return the tasa
+	 */
+	public String getTasa() {
+<span class="nc" id="L204">		return tasa;</span>
+	}
+	/**
+	 * @param tasa the tasa to set
+	 */
+	public void setTasa(String tasa) {
+<span class="nc" id="L210">		this.tasa = tasa;</span>
+<span class="nc" id="L211">	}</span>
+	/**
+	 * @return the deuda
+	 */
+	public String getDeuda() {
+<span class="nc" id="L216">		return deuda;</span>
+	}
+	/**
+	 * @param deuda the deuda to set
+	 */
+	public void setDeuda(String deuda) {
+<span class="nc" id="L222">		this.deuda = deuda;</span>
+<span class="nc" id="L223">	}</span>
+	
+	@Override
+	public String toString(){
+<span class="fc" id="L227">		return this.numOrden +&quot;;&quot;+ this.bin +&quot;;&quot;+ this.iai  +&quot;;&quot;+ this.entidad  +&quot;;&quot;+this.oficina +&quot;;&quot;+ this.producto  +&quot;;&quot;+ this.contrato</span>
+				 +&quot;;&quot;+ this.nombre  +&quot;;&quot;+ this.dirreccion  +&quot;;&quot;+ this.tasa +&quot;;&quot;+ this.deuda;
+	}
+	
+	public static void ordenarFile(String rutaBase, String nombreArcOne){
+<span class="fc" id="L232">		LinkedList&lt;DataFileOne&gt; listaDatos = new LinkedList&lt;DataFileOne&gt;();</span>
+		
+		try {
+<span class="fc" id="L235">			String line = &quot;&quot;;</span>
+<span class="fc" id="L236">		    BufferedReader bfr = new BufferedReader(new FileReader(new File(rutaBase+nombreArcOne)));</span>
+<span class="fc bfc" id="L237" title="All 2 branches covered.">		    while((line = bfr.readLine()) != null){</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">		    	if(!line.split(&quot;;&quot;)[0].contains(&quot;BIN&quot;)){</span>
+<span class="fc" id="L239">		    		listaDatos.add(new DataFileOne(line.split(&quot;;&quot;)));</span>
+		    	}
+		    }
+<span class="fc" id="L242">		    Collections.sort(listaDatos,Comparator.comparing(DataFileOne::getNumOrden));</span>
+<span class="fc" id="L243">		    bfr.close();</span>
+		    
+<span class="fc" id="L245">		    File file = new File(rutaBase+&quot;DataFileOneOrder.txt&quot;);</span>
+<span class="pc bpc" id="L246" title="1 of 2 branches missed.">			if(file.exists())</span>
+<span class="fc" id="L247">				file.delete();</span>
+				
+<span class="fc" id="L249">			file.createNewFile();</span>
+			
+<span class="fc" id="L251">			BufferedWriter bw = new BufferedWriter(new FileWriter(file));</span>
+<span class="fc bfc" id="L252" title="All 2 branches covered.">			for (DataFileOne dataFileOne : listaDatos) {</span>
+<span class="fc" id="L253">		    	bw.write(dataFileOne.toString()+&quot;\n&quot;);</span>
+<span class="fc" id="L254">			}</span>
+<span class="fc" id="L255">			bw.close();</span>
+					
+<span class="nc" id="L257">		} catch (Exception e) {</span>
+<span class="nc" id="L258">			LOGGER.info(&quot;Error: &quot; + e.getMessage());</span>
+<span class="fc" id="L259">		}</span>
+<span class="fc" id="L260">	}</span>
+	
+	public static ArrayList&lt;DataFileOne&gt; toFileDataFile(String rutaArchivo){
+<span class="fc" id="L263">		ArrayList&lt;DataFileOne&gt; listFileOne = new ArrayList&lt;DataFileOne&gt;();</span>
+		
+		try {
+<span class="fc" id="L266">			String line = &quot;&quot;;</span>
+<span class="fc" id="L267">			BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">			while((line = br.readLine()) != null ){</span>
+<span class="fc" id="L269">				listFileOne.add(new DataFileOne(line.split(&quot;;&quot;),0));</span>
+			}
+<span class="fc" id="L271">			br.close();</span>
+<span class="nc" id="L272">		} catch (Exception e) {</span>
+			// TODO: handle exception
+<span class="fc" id="L274">		}</span>
+<span class="fc" id="L275">		return listFileOne;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

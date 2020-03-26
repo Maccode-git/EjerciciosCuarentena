@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataFileTwo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CAPIJ001-01-CO</a> &gt; <a href="index.source.html" class="el_package">com.bbva.capi.data</a> &gt; <span class="el_source">DataFileTwo.java</span></div><h1>DataFileTwo.java</h1><pre class="source lang-java linenums">package com.bbva.capi.data;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class DataFileTwo {
+	
+<span class="fc" id="L18">	private static final Logger LOGGER = LoggerFactory.getLogger(DataFileTwo.class);</span>
+	private String numOrden;
+	private String entidad;
+	private String oficina;
+	private String cuenta;
+	private String mesMora;
+	private String codTransf;
+	private String tcAsociada;
+	
+<span class="nc" id="L27">	public DataFileTwo(){}</span>
+	
+	/**
+	 * @param numOrden
+	 * @param entidad
+	 * @param oficina
+	 * @param cuenta
+	 * @param mesMora
+	 * @param codTransf
+	 * @param tcAsociada
+	 */
+	public DataFileTwo(String numOrden, String entidad, String oficina, String cuenta, String mesMora, String codTransf,
+			String tcAsociada) {
+<span class="nc" id="L40">		super();</span>
+<span class="nc" id="L41">		this.numOrden = numOrden;</span>
+<span class="nc" id="L42">		this.entidad = entidad;</span>
+<span class="nc" id="L43">		this.oficina = oficina;</span>
+<span class="nc" id="L44">		this.cuenta = cuenta;</span>
+<span class="nc" id="L45">		this.mesMora = mesMora;</span>
+<span class="nc" id="L46">		this.codTransf = codTransf;</span>
+<span class="nc" id="L47">		this.setTcAsociada(tcAsociada);</span>
+<span class="nc" id="L48">	}</span>
+
+
+
+	public DataFileTwo(String[] arrayLine) {
+<span class="fc" id="L53">		super();</span>
+<span class="fc" id="L54">		this.entidad = arrayLine[0];</span>
+<span class="fc" id="L55">		this.oficina = arrayLine[1];</span>
+<span class="fc" id="L56">		this.cuenta = arrayLine[2];</span>
+<span class="fc" id="L57">		this.mesMora = arrayLine[3];</span>
+<span class="fc" id="L58">		this.codTransf = arrayLine[4];</span>
+<span class="fc" id="L59">		this.setTcAsociada(arrayLine[5]);</span>
+<span class="fc" id="L60">		this.numOrden = this.entidad+this.oficina+this.cuenta;</span>
+<span class="fc" id="L61">	}</span>
+	
+	public DataFileTwo(String[] arrayLine,int val) {
+<span class="fc" id="L64">		super();</span>
+<span class="fc" id="L65">		this.numOrden = arrayLine[0];</span>
+<span class="fc" id="L66">		this.entidad = arrayLine[1];</span>
+<span class="fc" id="L67">		this.oficina = arrayLine[2];</span>
+<span class="fc" id="L68">		this.cuenta = arrayLine[3];</span>
+<span class="fc" id="L69">		this.mesMora = arrayLine[4];</span>
+<span class="fc" id="L70">		this.codTransf = arrayLine[5];</span>
+<span class="fc" id="L71">		this.setTcAsociada(arrayLine[6]);</span>
+		
+<span class="fc" id="L73">	}</span>
+	
+	/**
+	 * @return the entidad
+	 */
+	public String getEntidad() {
+<span class="fc" id="L79">		return entidad;</span>
+	}
+
+	/**
+	 * @param entidad the entidad to set
+	 */
+	public void setEntidad(String entidad) {
+<span class="nc" id="L86">		this.entidad = entidad;</span>
+<span class="nc" id="L87">	}</span>
+
+	/**
+	 * @return the numOrden
+	 */
+	public String getNumOrden() {
+<span class="fc" id="L93">		return numOrden;</span>
+	}
+	/**
+	 * @param numOrden the numOrden to set
+	 */
+	public void setNumOrden(String numOrden) {
+<span class="nc" id="L99">		this.numOrden = numOrden;</span>
+<span class="nc" id="L100">	}</span>
+	/**
+	 * @return the oficina
+	 */
+	public String getOficina() {
+<span class="fc" id="L105">		return oficina;</span>
+	}
+	/**
+	 * @param oficina the oficina to set
+	 */
+	public void setOficina(String oficina) {
+<span class="nc" id="L111">		this.oficina = oficina;</span>
+<span class="nc" id="L112">	}</span>
+	/**
+	 * @return the cuenta
+	 */
+	public String getCuenta() {
+<span class="fc" id="L117">		return cuenta;</span>
+	}
+	/**
+	 * @param cuenta the cuenta to set
+	 */
+	public void setCuenta(String cuenta) {
+<span class="nc" id="L123">		this.cuenta = cuenta;</span>
+<span class="nc" id="L124">	}</span>
+	/**
+	 * @return the mesMora
+	 */
+	public String getMesMora() {
+<span class="fc" id="L129">		return mesMora;</span>
+	}
+	/**
+	 * @param mesMora the mesMora to set
+	 */
+	public void setMesMora(String mesMora) {
+<span class="nc" id="L135">		this.mesMora = mesMora;</span>
+<span class="nc" id="L136">	}</span>
+	/**
+	 * @return the codTransf
+	 */
+	public String getCodTransf() {
+<span class="nc" id="L141">		return codTransf;</span>
+	}
+	/**
+	 * @param codTransf the codTransf to set
+	 */
+	public void setCodTransf(String codTransf) {
+<span class="nc" id="L147">		this.codTransf = codTransf;</span>
+<span class="nc" id="L148">	}</span>
+	/**
+	 * @return the tcAsociada
+	 */
+	public String getTcAsociada() {
+<span class="fc" id="L153">		return tcAsociada;</span>
+	}
+	/**
+	 * @param tcAsociada the tcAsociada to set
+	 */
+	public void setTcAsociada(String tcAsociada) {
+		
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		if(tcAsociada.indexOf(&quot;A&quot;) != -1)</span>
+<span class="fc" id="L161">			tcAsociada = tcAsociada.replace('A', tcAsociada.charAt(tcAsociada.indexOf(&quot;A&quot;)+1));</span>
+		
+<span class="fc bfc" id="L163" title="All 2 branches covered.">		if(tcAsociada.indexOf(&quot;B&quot;) != -1)</span>
+<span class="fc" id="L164">			tcAsociada = tcAsociada.replace('B', tcAsociada.charAt(tcAsociada.indexOf(&quot;B&quot;)-1));</span>
+		
+<span class="fc bfc" id="L166" title="All 2 branches covered.">		if(tcAsociada.indexOf(&quot;X&quot;) != -1)</span>
+<span class="fc" id="L167">			tcAsociada = tcAsociada.replace('X', tcAsociada.charAt(tcAsociada.length()-1));</span>
+		
+<span class="fc bfc" id="L169" title="All 2 branches covered.">		if(tcAsociada.indexOf(&quot;W&quot;) != -1)</span>
+<span class="fc" id="L170">			tcAsociada = tcAsociada.replace('W', tcAsociada.charAt(6));</span>
+		
+<span class="fc bfc" id="L172" title="All 2 branches covered.">		if(tcAsociada.indexOf(&quot;Z&quot;) != -1)</span>
+<span class="fc" id="L173">			tcAsociada = tcAsociada.replace('Z', '9');</span>
+		
+<span class="fc" id="L175">		this.tcAsociada = tcAsociada;</span>
+<span class="fc" id="L176">	}</span>
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+<span class="fc" id="L183">		return numOrden + &quot;;&quot; + entidad + &quot;;&quot; + oficina + &quot;;&quot; + cuenta + &quot;;&quot; +  mesMora + &quot;;&quot; +  codTransf + &quot;;&quot; + tcAsociada;</span>
+	}
+	
+	public static void ordenarFile(String rutaBase, String nombreArcOne){
+<span class="fc" id="L187">		LinkedList&lt;DataFileTwo&gt; listaDatos = new LinkedList&lt;DataFileTwo&gt;();</span>
+		
+		try {
+<span class="fc" id="L190">			String line = &quot;&quot;;</span>
+<span class="fc" id="L191">		    BufferedReader bfr = new BufferedReader(new FileReader(new File(rutaBase+nombreArcOne)));</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">		    while((line = bfr.readLine()) != null){</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">		    	if(!line.split(&quot;;&quot;)[0].contains(&quot;ENTIDAD&quot;)){</span>
+		    		
+<span class="fc" id="L195">		    		listaDatos.add(new DataFileTwo(line.split(&quot;;&quot;)));</span>
+		    	}
+		    }
+<span class="fc" id="L198">		    Collections.sort(listaDatos,Comparator.comparing(DataFileTwo::getNumOrden));</span>
+<span class="fc" id="L199">		    bfr.close();</span>
+		    
+<span class="fc" id="L201">		    File file = new File(rutaBase+&quot;DataFileTwoOrder.txt&quot;);</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">			if(file.exists())</span>
+<span class="fc" id="L203">				file.delete();</span>
+				
+<span class="fc" id="L205">			file.createNewFile();</span>
+			
+<span class="fc" id="L207">			BufferedWriter bw = new BufferedWriter(new FileWriter(file));</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">			for (DataFileTwo dataFileTwo : listaDatos) {</span>
+<span class="fc" id="L209">		    	bw.write(dataFileTwo.toString()+&quot;\n&quot;);</span>
+<span class="fc" id="L210">			}</span>
+<span class="fc" id="L211">			bw.close();</span>
+					
+<span class="nc" id="L213">		} catch (Exception e) {</span>
+<span class="nc" id="L214">			LOGGER.info(&quot;Error: &quot; + e.getMessage());</span>
+<span class="fc" id="L215">		}</span>
+<span class="fc" id="L216">	}</span>
+	
+	public static ArrayList&lt;DataFileTwo&gt; toFileDataFile(String rutaArchivo){
+<span class="fc" id="L219">		ArrayList&lt;DataFileTwo&gt; listFileTwo = new ArrayList&lt;DataFileTwo&gt;();</span>
+		
+		try {
+<span class="fc" id="L222">			String line = &quot;&quot;;</span>
+<span class="fc" id="L223">			BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">			while((line = br.readLine()) != null ){</span>
+<span class="fc" id="L225">				listFileTwo.add(new DataFileTwo(line.split(&quot;;&quot;),0));</span>
+			}
+<span class="fc" id="L227">			br.close();</span>
+<span class="nc" id="L228">		} catch (Exception e) {</span>
+			// TODO: handle exception
+<span class="fc" id="L230">		}</span>
+<span class="fc" id="L231">		return listFileTwo;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
