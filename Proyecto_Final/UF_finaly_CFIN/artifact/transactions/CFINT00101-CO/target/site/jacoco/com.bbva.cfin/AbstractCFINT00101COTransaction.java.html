@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractCFINT00101COTransaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CFINT001</a> &gt; <a href="index.source.html" class="el_package">com.bbva.cfin</a> &gt; <span class="el_source">AbstractCFINT00101COTransaction.java</span></div><h1>AbstractCFINT00101COTransaction.java</h1><pre class="source lang-java linenums">package com.bbva.cfin;
+
+import com.bbva.cfin.dto.finalizator.DataInOneDTO;
+import com.bbva.cfin.dto.finalizator.DataOutOneDTO;
+
+import com.bbva.elara.transaction.AbstractTransaction;
+
+public abstract class AbstractCFINT00101COTransaction extends AbstractTransaction {
+
+<span class="fc" id="L10">	public AbstractCFINT00101COTransaction(){</span>
+<span class="fc" id="L11">	}</span>
+	
+	
+	/**
+	 * Return value for input parameter dataInOneDTO
+	 */
+	protected DataInOneDTO getDatainonedto(){
+<span class="fc" id="L18">		return (DataInOneDTO)getParameter(&quot;dataInOneDTO&quot;);</span>
+	}
+	/**
+	 * Set value for output parameter DataInOneDTO
+	 */
+	protected void setDataInOneDTO(final DataInOneDTO field){
+<span class="fc" id="L24">		this.addParameter(&quot;dataInOneDTO&quot;, field);</span>
+<span class="fc" id="L25">	}	</span>
+	
+
+	/**
+	 * Return value for input parameter dataOutOneDTO
+	 */
+	protected DataOutOneDTO getDataoutonedto(){
+<span class="fc" id="L32">		return (DataOutOneDTO)getParameter(&quot;dataOutOneDTO&quot;);</span>
+	}
+	/**
+	 * Set value for output parameter dataOutOneDTO
+	 */
+	protected void setDataoutonedto(final DataOutOneDTO field){
+<span class="nc" id="L38">		this.addParameter(&quot;dataOutOneDTO&quot;, field);</span>
+<span class="nc" id="L39">	}			</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

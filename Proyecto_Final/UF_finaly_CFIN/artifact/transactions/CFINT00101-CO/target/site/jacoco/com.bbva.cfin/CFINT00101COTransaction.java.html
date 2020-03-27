@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CFINT00101COTransaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CFINT001</a> &gt; <a href="index.source.html" class="el_package">com.bbva.cfin</a> &gt; <span class="el_source">CFINT00101COTransaction.java</span></div><h1>CFINT00101COTransaction.java</h1><pre class="source lang-java linenums">package com.bbva.cfin;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.bbva.cfin.dto.finalizator.DataInOneDTO;
+import com.bbva.cfin.dto.finalizator.DataOutOneDTO;
+import com.bbva.cfin.lib.r001.CFINR001;
+import com.bbva.elara.domain.transaction.Severity;
+import com.bbva.elara.domain.transaction.response.HttpResponseCode;
+
+
+
+/**
+ * Proy_Transacion_One
+ * Implementacion de logica de negocio.
+ * @author formacion
+ *
+ */
+<span class="fc" id="L20">public class CFINT00101COTransaction extends AbstractCFINT00101COTransaction {</span>
+<span class="fc" id="L21">	private static Logger LOGGER = LoggerFactory.getLogger(CFINT00101COTransaction.class);</span>
+	/* (non-Javadoc)
+	 * @see com.bbva.elara.domain.transaction.Transaction#execute()
+	 */
+	@Override
+	public void execute() {
+		try {
+<span class="fc" id="L28">			LOGGER.debug(&quot;Start search&quot;);</span>
+<span class="fc" id="L29">			CFINR001 lib = (CFINR001)getServiceLibrary(CFINR001.class); </span>
+<span class="fc" id="L30">			DataInOneDTO in = this.getDatainonedto();</span>
+<span class="nc" id="L31">			DataOutOneDTO out = lib.execute(in.getOrigen(), in.getDestino(), in.getPan(), in.getNumCuotas());</span>
+<span class="nc" id="L32">			this.setDataoutonedto(out);</span>
+<span class="nc" id="L33">			setContentLocation(getURIPath());</span>
+<span class="nc" id="L34">			setHttpResponseCode(HttpResponseCode.HTTP_CODE_200, Severity.OK);</span>
+<span class="nc" id="L35">			LOGGER.debug(&quot;Successful search&quot;);</span>
+<span class="fc" id="L36">		} catch (Exception e) {</span>
+<span class="fc" id="L37">			LOGGER.debug(&quot;Error: &quot; +e.getMessage());</span>
+<span class="nc" id="L38">		}</span>
+<span class="fc" id="L39">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

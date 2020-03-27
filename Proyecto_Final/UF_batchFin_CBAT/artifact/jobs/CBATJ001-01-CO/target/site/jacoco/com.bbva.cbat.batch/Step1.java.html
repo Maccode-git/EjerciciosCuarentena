@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Step1.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CBATJ001-01-CO</a> &gt; <a href="index.source.html" class="el_package">com.bbva.cbat.batch</a> &gt; <span class="el_source">Step1.java</span></div><h1>Step1.java</h1><pre class="source lang-java linenums">package com.bbva.cbat.batch;
+
+import java.util.ArrayList;
+
+import org.apache.log4j.Logger;
+import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.repeat.RepeatStatus;
+
+import com.bbva.cbat.batch.lib.DataContractOut;
+import com.bbva.elara.batch.contextutils.ContextUtils;
+
+<span class="fc" id="L14">public class Step1 implements Tasklet {</span>
+
+	private ContextUtils contextUtils;
+	
+	public RepeatStatus execute(StepContribution contribution,
+			ChunkContext chunkContext) throws Exception {
+	
+<span class="fc" id="L21">		Logger log = contextUtils.getLOGGER(chunkContext, getClass());</span>
+
+<span class="fc" id="L23">		String rutaArchivo = &quot;C:/Users/formacion/Desktop/IDE_APX_win64/IDE_APX_win64/workspace/UF_finaly_CFIN/&quot;;</span>
+<span class="fc" id="L24">		ArrayList&lt;DataContractOut&gt; listData = DataContractOut.OrderToBatch(rutaArchivo);</span>
+<span class="fc" id="L25">		DataContractOut.createFile(rutaArchivo,listData);  </span>
+<span class="fc" id="L26">		DataContractOut.validateFileResult(rutaArchivo,listData);</span>
+		// TODO Auto-generated method stub
+<span class="fc" id="L28">		return null;</span>
+	}
+
+	public void setContextUtils(ContextUtils contextUtils) {
+<span class="fc" id="L32">		this.contextUtils = contextUtils;</span>
+<span class="fc" id="L33">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

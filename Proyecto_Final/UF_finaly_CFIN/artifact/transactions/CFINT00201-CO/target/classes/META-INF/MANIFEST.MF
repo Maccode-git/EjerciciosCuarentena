@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1585337378569
+Build-Jdk: 1.8.0_91
+Built-By: formacion
+Bundle-Activator: com.bbva.cfin.CFINT00201COTransaction
+Bundle-Category: transaction
+Bundle-Description: Transaccion 2
+Bundle-ManifestVersion: 2
+Bundle-Name: CFINT002
+Bundle-SymbolicName: CFINT002-01-CO
+Bundle-Version: 01.0.0.CO
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.bbva.cfin;uses:="com.bbva.elara.transaction,com.bbva
+ .cfin.lib.r002,org.slf4j,com.bbva.elara.domain.transaction.response,com
+ .bbva.elara.domain.transaction";version="01.0.0.CO"
+Import-Package: com.bbva.cfin.lib.r002;version="0.0",com.bbva.elara.doma
+ in.transaction;version="0.0",com.bbva.elara.domain.transaction.response
+ ;version="0.0",com.bbva.elara.transaction;version="0.0",org.slf4j;versi
+ on="0.0"
+Tool: Bnd-1.50.0

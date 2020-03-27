@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CFINT00201COTransaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CFINT002</a> &gt; <a href="index.source.html" class="el_package">com.bbva.cfin</a> &gt; <span class="el_source">CFINT00201COTransaction.java</span></div><h1>CFINT00201COTransaction.java</h1><pre class="source lang-java linenums">package com.bbva.cfin;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.bbva.cfin.lib.r002.CFINR002;
+import com.bbva.elara.domain.transaction.Severity;
+import com.bbva.elara.domain.transaction.response.HttpResponseCode;
+
+/**
+ * Transaccion 2
+ * Implementacion de logica de negocio.
+ * @author formacion
+ *
+ */
+<span class="fc" id="L16">public class CFINT00201COTransaction extends AbstractCFINT00201COTransaction {</span>
+<span class="fc" id="L17">	private static Logger LOGGER = LoggerFactory.getLogger(CFINT00201COTransaction.class);</span>
+	/* (non-Javadoc)
+	 * @see com.bbva.elara.domain.transaction.Transaction#execute()
+	 */
+	@Override
+	public void execute() {
+		try {
+<span class="fc" id="L24">			LOGGER.debug(&quot;Start search&quot;);</span>
+<span class="fc" id="L25">			CFINR002 lib = (CFINR002)getServiceLibrary(CFINR002.class); </span>
+<span class="nc" id="L26">			lib.execute();</span>
+<span class="nc" id="L27">			setContentLocation(getURIPath());</span>
+<span class="nc" id="L28">			setHttpResponseCode(HttpResponseCode.HTTP_CODE_200, Severity.OK);</span>
+<span class="nc" id="L29">			LOGGER.debug(&quot;Successful search&quot;);</span>
+<span class="fc" id="L30">		} catch (Exception e) {</span>
+<span class="fc" id="L31">			LOGGER.debug(&quot;Error: &quot; +e.getMessage());</span>
+<span class="nc" id="L32">		}</span>
+<span class="fc" id="L33">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

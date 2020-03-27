@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataContractOut.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CFINR002IMPL</a> &gt; <a href="index.source.html" class="el_package">com.bbva.cfin.lib.r002.impl</a> &gt; <span class="el_source">DataContractOut.java</span></div><h1>DataContractOut.java</h1><pre class="source lang-java linenums">package com.bbva.cfin.lib.r002.impl;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+
+public class DataContractOut {
+<span class="fc" id="L18">	private static final Logger LOGGER = LoggerFactory.getLogger(DataContractOut.class);</span>
+	private String Entidad;
+	private String Oficina;
+	private String Contrato;
+	private String  Saldo;
+	private Date   Feuliq;
+	private float  Tea;
+	private char EstadoBatch; 
+	
+	
+	/**
+	 * Constructor DataContractOut
+	 */
+<span class="nc" id="L31">	public DataContractOut(){}</span>
+
+	
+	/**
+	 * @param entidad
+	 * @param oficina
+	 * @param contrato
+	 * @param saldo
+	 * @param feuliq
+	 * @param tea
+	 * @param estadoBatch
+	 */
+	public DataContractOut(String entidad, String oficina, String contrato, String saldo, String feuliq, String tea,
+			char estadoBatch) {
+<span class="fc" id="L45">		super();</span>
+		try {
+<span class="fc" id="L47">			Entidad = entidad;</span>
+<span class="fc" id="L48">			Oficina = oficina;</span>
+<span class="fc" id="L49">			Contrato = contrato;</span>
+<span class="fc" id="L50">			Saldo = saldo;</span>
+<span class="fc" id="L51">			Feuliq = new SimpleDateFormat(&quot;yyyy/MM/dd&quot;).parse(feuliq);</span>
+<span class="fc" id="L52">			Tea = Float.parseFloat(tea);</span>
+<span class="fc" id="L53">			EstadoBatch = estadoBatch;</span>
+<span class="nc" id="L54">		} catch (Exception e) {</span>
+<span class="nc" id="L55">			LOGGER.info(&quot;Error: &quot; + e.getMessage());</span>
+<span class="fc" id="L56">		}</span>
+<span class="fc" id="L57">	}</span>
+	/**
+	 * @param registro
+	 */
+	public DataContractOut(String[] registro) {
+<span class="fc" id="L62">		super();</span>
+		try {
+<span class="fc" id="L64">			Entidad 	= registro[0];</span>
+<span class="fc" id="L65">			Oficina 	= registro[1];</span>
+<span class="fc" id="L66">			Contrato 	= registro[2];</span>
+<span class="fc" id="L67">			Saldo 		= registro[3];</span>
+<span class="fc" id="L68">			Feuliq 		= new SimpleDateFormat(&quot;yyyy/MM/dd&quot;).parse(registro[4]);</span>
+<span class="fc" id="L69">			Tea 		= Float.parseFloat(registro[5]);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">			if(registro.length == 7)</span>
+<span class="nc" id="L71">				EstadoBatch = registro[6].toCharArray()[0];</span>
+			else
+<span class="fc" id="L73">				EstadoBatch = 'N';</span>
+<span class="nc" id="L74">		} catch (Exception e) {</span>
+<span class="nc" id="L75">			LOGGER.info(&quot;Error: &quot; + e.getMessage());</span>
+<span class="fc" id="L76">		}</span>
+		
+<span class="fc" id="L78">	}</span>
+	
+	/**
+	 * @return the estadoBatch
+	 */
+	public char getEstadoBatch() {
+<span class="nc" id="L84">		return EstadoBatch;</span>
+	}
+	/**
+	 * @param estadoBatch the estadoBatch to set
+	 */
+	public void setEstadoBatch(char estadoBatch) {
+<span class="nc" id="L90">		EstadoBatch = estadoBatch;</span>
+<span class="nc" id="L91">	}</span>
+	
+	/**
+	 * @return the entidad
+	 */
+	public String getEntidad() {
+<span class="nc" id="L97">		return Entidad;</span>
+	}
+	/**
+	 * @param entidad the entidad to set
+	 */
+	public void setEntidad(String entidad) {
+<span class="nc" id="L103">		Entidad = entidad;</span>
+<span class="nc" id="L104">	}</span>
+	/**
+	 * @return the oficina
+	 */
+	public String getOficina() {
+<span class="nc" id="L109">		return Oficina;</span>
+	}
+	/**
+	 * @param oficina the oficina to set
+	 */
+	public void setOficina(String oficina) {
+<span class="nc" id="L115">		Oficina = oficina;</span>
+<span class="nc" id="L116">	}</span>
+	/**
+	 * @return the contrato
+	 */
+	public String getContrato() {
+<span class="nc" id="L121">		return Contrato;</span>
+	}
+	/**
+	 * @param contrato the contrato to set
+	 */
+	public void setContrato(String contrato) {
+<span class="nc" id="L127">		Contrato = contrato;</span>
+<span class="nc" id="L128">	}</span>
+	/**
+	 * @return the saldo
+	 */
+	public String getSaldo() {
+<span class="nc" id="L133">		return Saldo;</span>
+	}
+	/**
+	 * @param saldo the saldo to set
+	 */
+	public void setSaldo(String saldo) {
+<span class="nc" id="L139">		Saldo = saldo;</span>
+<span class="nc" id="L140">	}</span>
+	/**
+	 * @return the feuliq
+	 */
+	public Date getFeuliq() {
+<span class="nc" id="L145">		return Feuliq;</span>
+	}
+	/**
+	 * @param feuliq the feuliq to set
+	 */
+	public void setFeuliq(Date feuliq) {
+<span class="nc" id="L151">		Feuliq = feuliq;</span>
+<span class="nc" id="L152">	}</span>
+	/**
+	 * @return the tea
+	 */
+	public float getTea() {
+<span class="nc" id="L157">		return Tea;</span>
+	}
+	/**
+	 * @param tea the tea to set
+	 */
+	public void setTea(float tea) {
+<span class="nc" id="L163">		Tea = tea;</span>
+<span class="nc" id="L164">	}</span>
+	
+	/**
+	 * @param rutaArchivo
+	 * @return
+	 */
+	public static ArrayList&lt;DataContractOut&gt; toFileDataFile(String rutaArchivo){
+<span class="fc" id="L171">		ArrayList&lt;DataContractOut&gt; listFile = new ArrayList&lt;DataContractOut&gt;();</span>
+		try {
+<span class="fc" id="L173">			String line = &quot;&quot;;</span>
+<span class="fc" id="L174">			BufferedReader br = new BufferedReader(new FileReader(rutaArchivo));</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">			while((line = br.readLine()) != null ){</span>
+<span class="fc" id="L176">				System.out.println(&quot;==============&quot;);</span>
+<span class="fc" id="L177">				System.out.println(line);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">				if(!line.split(&quot;;&quot;)[0].contains(&quot;ENTIDAD&quot;))</span>
+<span class="fc" id="L179">					listFile.add(new DataContractOut(line.split(&quot;;&quot;)));</span>
+			}
+<span class="fc" id="L181">			br.close();</span>
+<span class="nc" id="L182">		} catch (Exception e) {</span>
+			//
+<span class="fc" id="L184">		}</span>
+<span class="fc" id="L185">		return listFile;</span>
+	}
+	
+	/**
+	 * @param rutaBase
+	 * @param listaDatos
+	 */
+	public static void createFile(String rutaBase,ArrayList&lt;DataContractOut&gt; listaDatos){
+		try {
+<span class="fc" id="L194">		    File file = new File(rutaBase+&quot;DataContractOut.txt&quot;);</span>
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">			if(file.exists())</span>
+<span class="fc" id="L196">				file.delete();</span>
+				
+<span class="fc" id="L198">			file.createNewFile();</span>
+			
+<span class="fc" id="L200">			BufferedWriter bw = new BufferedWriter(new FileWriter(file));</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">			for (DataContractOut dataFile : listaDatos) {</span>
+<span class="fc" id="L202">		    	bw.write(dataFile.toString()+&quot;\n&quot;);</span>
+<span class="fc" id="L203">			}</span>
+<span class="fc" id="L204">			bw.close();</span>
+					
+<span class="nc" id="L206">		} catch (Exception e) {</span>
+<span class="nc" id="L207">			LOGGER.info(&quot;Error: &quot; + e.getMessage());</span>
+<span class="fc" id="L208">		}</span>
+<span class="fc" id="L209">	}</span>
+	
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+
+<span class="fc" id="L218">		return Entidad + &quot;;&quot; + Oficina + &quot;;&quot; + Contrato + &quot;;&quot; + Saldo + &quot;;&quot; + (new SimpleDateFormat(&quot;yyyy-MM-dd&quot;)).format(Feuliq)+ &quot;;&quot; + Tea + &quot;;&quot; + EstadoBatch;</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
